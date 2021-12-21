@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body class="img js-fullheight" [ngStyle]="{'background-image':'url(https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F34%2F2020%2F09%2F10%2Fmix-of-medical-items-5f7e6c77-1020.jpg)'}">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Covid Watch</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Get an account</h3>
+		      	<form class="signin-form"
+            novalidate
+            (ngSubmit)="saveSignUp()"
+            [formGroup]="signUpForm"
+            >
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" placeholder="Email (Required)"
+                  formControlName ="email"
+                  [ngClass]="{'is-invalid': (signUpForm.get('email')!.touched || signUpForm.get('email')!.dirty) && !signUpForm.get('email')!.valid }">
+                <span class="invalid-feedback">
+                  <span *ngIf= "signUpForm.get('email')!.errors?.['required']">
+                    Please enter your email
+                  </span>
+                  <span *ngIf= "signUpForm.get('email')!.errors?.['pattern']">
+                    Please enter a valid email
+                  </span>
+                </span>
+		      		</div>
+	            <div class="form-group">
+	              <input
+                formControlName ="password"
+                [ngClass]="{'is-invalid': (signUpForm.get('password')!.touched || signUpForm.get('password')!.dirty) && !signUpForm.get('password')!.valid }"
+                id="password-field" type="password" class="form-control" placeholder="Password" required>
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                <span class="invalid-feedback">
+                  <span *ngIf= "signUpForm.get('password')!.errors?.['required']">
+                    Please enter your password
+                  </span>
+                  <span *ngIf= "signUpForm.get('password')!.errors?.['minlength']">
+                    Please enter a valid password
+                  </span>
+                </span>
+	            </div>
+              <div class="form-group">
+		      			<input type="text" class="form-control" placeholder="FullName (Required)"
+                formControlName="name"
+                [ngClass]="{'is-invalid': (signUpForm.get('name')!.touched || signUpForm.get('name')!.dirty) && !signUpForm.get('name')!.valid }">
+                <span class="invalid-feedback">
+                  <span *ngIf= "signUpForm.get('name')!.errors?.['required']">
+                    Please enter your Full Name
+                  </span>
+                  <span *ngIf= "signUpForm.get('name')!.errors?.['minlength']">
+                    Please enter a valid Full Name
+                  </span>
+                </span>
+		      		</div>
+              <div class="form-group">
+		      			<label for="inputAddress">Address</label>
+                <input type="text" class="form-control"
+                placeholder="1234 Main St"
+                formControlName="address"
+                [ngClass]="{'is-invalid': (signUpForm.get('address')!.touched || signUpForm.get('address')!.dirty) && !signUpForm.get('address')!.valid }">
+                <span class="invalid-feedback">
+                  <span *ngIf= "signUpForm.get('address')!.errors?.['required']">
+                    Please enter your Address
+                  </span>
+                </span>
+		      		</div>
+              <div class="w-50 form-group d-md-flex ">
+                <div class="w-50 sociall">
+                  <a routerLink="/login" >SignIn</a>
+                </div>
+              </div>
+	            <div class="form-group signin">
+	            	<a><button type="submit" [disabled]="!signUpForm.valid" class="form-control submit px-3">Sign Up</button></a>
+	            </div>
+	            <div class="form-group d-md-flex">
+	            </div>
+	          </form>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</body>
+</html>
+

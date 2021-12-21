@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body class="img js-fullheight" [ngStyle]="{'background-image':'url(https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F34%2F2020%2F09%2F10%2Fmix-of-medical-items-5f7e6c77-1020.jpg)'}">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Covid Watch</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<form class="signin-form"
+            novalidate
+            (ngSubmit)="saveLogin()"
+            [formGroup]="loginForm"
+            >
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" placeholder="Email (Required)"
+                  formControlName ="email"
+                  [ngClass]="{'is-invalid': (loginForm.get('email')!.touched || loginForm.get('email')!.dirty) && !loginForm.get('email')!.valid }">
+                <span class="invalid-feedback">
+                  <span *ngIf= "loginForm.get('email')!.errors?.['required']">
+                    Please enter your email
+                  </span>
+                  <span *ngIf= "loginForm.get('email')!.errors?.['pattern']">
+                    Please enter a valid email
+                  </span>
+                </span>
+		      		</div>
+	            <div class="form-group">
+	              <input
+                formControlName ="password"
+                [ngClass]="{'is-invalid': (loginForm.get('password')!.touched || loginForm.get('password')!.dirty) && !loginForm.get('password')!.valid }"
+                id="password-field" type="password" class="form-control" placeholder="Password" required>
+                <!--
+
+                  <span toggle="#password-field" class="toggle-password"><fa-icon [icon]="faEye"></fa-icon></span>
+                -->
+                <span class="invalid-feedback">
+                  <span *ngIf= "loginForm.get('password')!.errors?.['required']">
+                    Please enter your password
+                  </span>
+                  <span *ngIf= "loginForm.get('password')!.errors?.['minlength']">
+                    Please enter a valid password
+                  </span>
+                </span>
+	            </div>
+	            <div class="form-group signin">
+	            	<button type="submit" [disabled]="!loginForm.valid" class="form-control  submit px-3"><a>Sign In</a></button>
+	            </div>
+	            <div class="form-group d-md-flex">
+	            	<div class="w-50 ">
+                  <div class="w-50 sociall">
+                    <a routerLink="/createuser" >SignUp</a>
+                  </div>
+								</div>
+								<div class="sociall w-50 text-md-right">
+									<a href="#" >Forgot Password</a>
+								</div>
+	            </div>
+	          </form>
+	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+	          <div class="social d-flex text-center">
+	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+	          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+  <script>
+    (function($) {
+
+      "use strict";
+
+      var fullHeight = function() {
+
+        $('.js-fullheight').css('height', $(window).height());
+        $(window).resize(function(){
+          $('.js-fullheight').css('height', $(window).height());
+        });
+
+      };
+      fullHeight();
+
+      $(".toggle-password").click(function() {
+
+        $(this).toggle("faEye");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+          input.attr("type", "text");
+        } else {
+          input.attr("type", "password");
+        }
+      });
+
+    })(jQuery);
+  </script>
+
+	</body>
+</html>
+

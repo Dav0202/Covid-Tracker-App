@@ -1,0 +1,30 @@
+
+.navbar-custom .nav-item.active .nav-link.active,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: c;
+}
+
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #ffbb99;
+}
+
+li > a.nav-link.active{
+  color: #ffbb99;
+}
+
+.nav-item :hover{
+  color: #ffbb99;
+}
+button.btn-search{
+  color: #ffbb99;
+  border-color: #ffbb99;
+}
+
+button.btn-search:hover{
+  background-color: #ffbb99;
+  border-color: #ffbb99;
+  color: #fff;
+}
