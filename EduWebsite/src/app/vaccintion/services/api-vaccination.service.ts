@@ -8,6 +8,8 @@ import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 })
 export class ApiVaccinationService {
 
+  private token: string = 'e8198e329amshf6be6de3c0ada87p188563jsnf9b47291d4c7'
+
   constructor(
     private http: HttpClient,
   ) { }
@@ -15,7 +17,7 @@ export class ApiVaccinationService {
   getauth() {
     return new HttpHeaders({
       "content-type": "application/json",
-      'x-rapidapi-key' : 'e8198e329amshf6be6de3c0ada87p188563jsnf9b47291d4c7'
+      'x-rapidapi-key' : this.token
     })
   }
 

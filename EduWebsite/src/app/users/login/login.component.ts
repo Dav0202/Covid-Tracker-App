@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ApiService1Service } from '../services/api-service1.service';
-import { Auth } from '../models/auth';
 import { Router } from '@angular/router';
-import { Tokenobj } from '../models/token';
 import { CookieService } from 'ngx-cookie-service';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,17 +12,19 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  faEye = faEye
   loginForm: FormGroup;
-
+  loginValid = false;
+  res: any;
+  token: any;
   constructor(
     private fb: FormBuilder,
     private apiservice: ApiService1Service,
     private router: Router,
-    private cookieservice: CookieService
+    private cookieservice: CookieService,
+    private toast: ToastrService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginForm = this.fb.group(
       {
         email: ['', [Validators.required,
@@ -33,29 +33,48 @@ export class LoginComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(3)]]
       }
     )
-   // this.loginForm = new FormGroup({
-   //   email: new FormControl(),
-   //   password: new FormControl(),
-   // });
+
   }
   saveLogin(){
     const p = {...this.loginForm.value}
     if (this.loginForm.valid) {
         if (this.loginForm.dirty) {
-          this.apiservice.getlogin(p)
-          .subscribe((token: any) =>{
-              this.cookieservice.set('my-token',token.token);
-              this.router.navigate(['/']);
-              console.log(token);
-                        } )
+          this.apiservice.getlogin(p).subscribe(
+            (
+              (token: any) =>{
+                if (token.token !== undefined) {
+                  this.cookieservice.set('my-token',token.token)
+                  this.token =token
+
+                }
+                if (!token) {
+                    this.loginValid = true
+                }
+                else{
+                  this.onRefresh()
+                  }
+                 }
+            )
+            )
         }
     }else{
       console.log('Please correct validation errors')
     }
-
-
   }
 
+  onRefresh() {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () { return false }
+    const currentUrl = '/homepage'
+    return this.router.navigateByUrl(currentUrl).then(() => {
+      this.router.navigated = false
+      this.router.navigate([this.router.url])
+      this.refreshPage()
+      this.toast.success('Login successful')
 
+    })
+  }
+  refreshPage() {
+    window.location.reload();
+  }
 
 }

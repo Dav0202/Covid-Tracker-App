@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable,throwError } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
-import { Province } from '../models/covidprovince';
-import { CovidbyProvince } from '../models/covidbyprovince';
+import { catchError } from 'rxjs/operators';
+
 
 
 
@@ -18,15 +17,25 @@ export class ApiCovidService {
   ) { }
 
 
-  getCovid19(): Observable<Province[]>{
-    const url: string = 'https://covid-19-statistics.p.rapidapi.com/provinces?iso=CHN'
-    return this.http.get<Province[]>(url,{headers: this.getauth()});
-  }
-
   getcovidbyProvince(): Observable<any[]>{
     const url: string = 'https://covid-19-statistics.p.rapidapi.com/reports'
     return this.http.get<any[]>(`${url}`,{headers: this.getauth()
-    });
+    }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  handleError(error:any){
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+        // client-side error
+        errorMessage = `There was an error: ${error.error.message}`;
+    } else {
+        // server-side error
+        errorMessage = `Error Code is: ${error.status}\nMessage: There is an error`;
+    }
+    return throwError(() => new Error(errorMessage))
+
   }
 
   getauth() {
@@ -36,9 +45,6 @@ export class ApiCovidService {
     })
   }
 
-  getparams(){
-    //returnconst data = {region_name : 'US'}
-  }
 
 
 }

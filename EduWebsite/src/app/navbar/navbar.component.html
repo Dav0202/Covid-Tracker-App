@@ -19,17 +19,21 @@
           <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/news">News</a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/login']" *ngIf ="!isLoggedIn">Login</a>
-        </li>
-        <li class="nav-item">
-          <a *ngIf ="isLoggedIn" class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
+        <ng-template #loggedIn>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/login']" >Login</a>
+          </li>
+        </ng-template>
+        <li class="nav-item" *ngIf="!isLoggedIn; else loggedIn">
+            <a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
         </li>
       </ul>
-      <form #form="ngForm" class="d-flex">
-        <input  name="searchkeyword"  class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-search btn-outline-success" type="submit">Search</button>
+      <form  class="d-flex">
+        <input name="searchTerm3" class="form-control me-2" type="search"
+        placeholder="Search" aria-label="Search"
+        [(ngModel)]="searchTerm3"
+        (input)="setValue()"
+        >
       </form>
     </div>
   </div>

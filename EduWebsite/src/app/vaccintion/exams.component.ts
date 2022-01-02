@@ -1,7 +1,5 @@
-import { map } from 'rxjs/operators';
 import { ApiVaccinationService } from './services/api-vaccination.service';
 import  Chart  from 'chart.js/auto';
-import { Charts } from './models/chart';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -39,7 +37,6 @@ export class ExamsComponent implements OnInit {
           for (let i = 0; i < this.result.length; ++i){
               this.obj[i] = this.result[i];
           }
-          console.log(this.obj);
           for(let index in this.obj)
             {
               this.obj1.push(parseInt(this.obj[index]["daily_vaccinations"]))
@@ -56,7 +53,7 @@ export class ExamsComponent implements OnInit {
            {
              this.obj4.push(parseInt(this.obj[index]["people_fully_vaccinated"]))
            }
-          console.log(this.obj3)
+
           this.chart = new Chart(this.chartRef.nativeElement,{
             type: 'bar',
             data: {
@@ -121,7 +118,6 @@ export class ExamsComponent implements OnInit {
           }
           )
           this.spinner.hide()
-
         }
 
     )

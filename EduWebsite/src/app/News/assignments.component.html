@@ -11,7 +11,7 @@
   <!-- Back to top button -->
   <div class="">
     <div class="back-to-top"></div>
-    <div class="page-banner overlay-dark bg-image">
+    <div class="page-banner overlay-dark bg-image" style="background-image: url(../../assets/images/Coronavirus.jpg);">
       <div class="banner-section">
         <div class="container text-center wow fadeInUp">
           <nav aria-label="Breadcrumb">
@@ -24,9 +24,9 @@
         </div> <!-- .container -->
       </div> <!-- .banner-section -->
     </div> <!-- .page-banner -->
-    <ngx-spinner></ngx-spinner>
     <div class="page-section">
       <div class="container ">
+        <ngx-spinner></ngx-spinner>
         <div class="row">
           <div class="col-lg-12">
             <div class="row">
@@ -60,7 +60,34 @@
       </div> <!-- .container -->
     </div> <!-- .page-section -->
   </div>
-  <pagination-controls *ngIf="data3" (pageChange)="p =$event"></pagination-controls>
+  <style>
+
+    .my-pagination /deep/ .ngx-pagination .current {
+      background: #ffbb99d7 ;
+      border-radius: 3px;
+      padding-left: 9px;
+      padding-right: 9px;
+      }
+
+
+    .my-pagination /deep/ .ngx-pagination a:hover, .ngx-pagination button{
+      text-decoration: none !important;
+    }
+    .my-pagination /deep/ .ngx-pagination a, .ngx-pagination button{
+      text-decoration: none !important;
+    }
+
+
+    .my-pagination /deep/ .ngx-pagination a:hover, .ngx-pagination {
+      background: #fff ;
+      color: #ffbb99d7;
+      border-radius: 3px;
+      padding-left: 9px;
+      padding-right: 9px;
+  }
+  </style>
+  <pagination-controls class="my-pagination" *ngIf="data3" (pageChange)="p =$event"
+  ></pagination-controls>
   <footer class="page-footer">
     <div class="container">
       <div class="row px-md-3">
@@ -72,24 +99,8 @@
           </ul>
         </div>
         <div class="col-sm-6 col-lg-3 py-3">
-          <h5>More</h5>
-          <ul class="footer-menu">
-            <li><a href="#">Terms & Condition</a></li>
-            <li><a href="#">Privacy</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg-3 py-3">
           <h5>Contact</h5>
           <p class="footer-link mt-2">Plot 45 Victoria Island Lagos Nigeria</p>
-          <!--
-            <div class="footer-sosmed mt-3">
-            <a href="#" target="_blank"><span class="mai-logo-facebook-f"></span></a>
-            <a href="#" target="_blank"><span class="mai-logo-twitter"></span></a>
-            <a href="#" target="_blank"><span class="mai-logo-google-plus-g"></span></a>
-            <a href="#" target="_blank"><span class="mai-logo-instagram"></span></a>
-            <a href="#" target="_blank"><span class="mai-logo-linkedin"></span></a>
-          </div>
-          -->
         </div>
       </div>
       <hr>
@@ -97,11 +108,6 @@
     </div>
   </footer>
  <!-- .page-footer -->
-
-
-
-
-
 
 </body>
 </html>

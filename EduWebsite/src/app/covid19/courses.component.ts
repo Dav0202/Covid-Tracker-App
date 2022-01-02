@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiCovidService } from './services/api-covid.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Province } from './models/covidprovince';
 import { CovidbyProvince } from './models/covidbyprovince';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SearchServiceService } from '../services/search-service.service';
 
 @Component({
   selector: 'app-courses',
@@ -11,12 +12,20 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+
+  maxSize=9
+  directionLinks=true
+  autoHide=true
+  responsive=true
   p: number = 1
   config: any;
-
   data :Province[];
   datas :any;
   datass: any[];
+  searchTerm:any;
+  searchTerm3:any;
+
+
 
   data1 :any[];
   data2 :any;
@@ -25,7 +34,9 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private apiservice: ApiCovidService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private saerchservice: SearchServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -38,27 +49,13 @@ export class CoursesComponent implements OnInit {
           this.data3 = datasss
          }
          this.spinner.hide()
-        //console.log(this.data3)
-
-      }
-    }
-    )
-    this.apiservice.getCovid19().subscribe({
-      next: data => {
-        this.data = data
-        this.datas = Object.values(this.data)
-        for (let datasss of this.datas) {
-          this.datass = datasss
-         }
-        //console.log(this.datass)
-
       }
     }
     )
 
+   this.saerchservice.currentMessage.subscribe(searchTerm => this.searchTerm = searchTerm)
 
   }
-
 
 
 

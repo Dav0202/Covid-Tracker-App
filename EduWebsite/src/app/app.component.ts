@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
+import { ApiService1Service } from './users/services/api-service1.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,31 +8,11 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError, Navigat
 
 })
 export class AppComponent {
-  title = 'EduWebsite';
-  //loading = true;
-//
-  //constructor(
-  //  private router: Router
-  //   ){
-  //     router.events.subscribe((
-  //       routerEvent: Event) => {
-  //         this.checkRouterEvent(routerEvent);
-  //       }
-  //     );
-  //   }
-//
-  //   checkRouterEvent(routerEvent: Event): void{
-  //      if (routerEvent instanceof NavigationStart) {
-  //          this.loading = true;
-  //      }
-  //      if (
-  //        routerEvent instanceof NavigationEnd ||
-  //        routerEvent instanceof NavigationCancel ||
-  //        routerEvent instanceof NavigationError
-  //      ) {
-  //          this.loading = false;
-  //      }
-  //   }
 
+  constructor(
+    private apiservice: ApiService1Service,
+  ){}
+
+  title = 'EduWebsite';
 
 }

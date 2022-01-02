@@ -14,9 +14,9 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private apiservice: ApiNewsService,
-  ) {
+  ) {}
 
-  }
+
 
   ngOnInit(): void {
     this.apiservice.getglobalNews().subscribe(
@@ -27,7 +27,6 @@ export class HomepageComponent implements OnInit {
           for (let datasss of this.data2) {
             this.data3 = datasss
            }
-          //console.log(this.data3)
       }
     }
     )

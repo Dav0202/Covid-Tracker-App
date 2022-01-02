@@ -31,7 +31,6 @@ export class AssignmentsComponent implements OnInit {
             this.data3 = datasss
            }
            this.spinner.hide()
-          //console.log(this.data3)
       }
     }
     )
